@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "author": "K3n",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

@@ -1,7 +1,8 @@
-const sendResponse = require ("../utils/responseMiddleware")
+// const sendResponse = require ("../utils/responseMiddleware")
+import sendResponse from "../utils/responseMiddleware.js"
 
 /* Is server alive? */
-module.exports = async (req, res)=> {
+export default async (req, res)=> {
     sendResponse(res, 201, true, "Server is alive")
     console.log(req.ip, "Server is alive");
 }

@@ -1,8 +1,8 @@
 //dotenv config
-require ("dotenv").config()
-// Essential imports
-const express = require ("express")
-const morgan = require("morgan")
+import "dotenv/config"
+import express from "express"
+import morgan from "morgan"
+import routing from "./src/alive.route.js"
 // const cors = require ("cors")
 
 const app = express()
@@ -28,4 +28,4 @@ app.listen (PORT, ()=> {
     }
 })
 
-app.use("/api", require("./src/routes/alive.route"))
+app.use("/api", routing)

@@ -16,4 +16,4 @@ const sendResponse = (res, statusCode, success, message, data = null, errors = n
     return res.status(statusCode).json(response)
 }
 
-module.exports = sendResponse
+export default sendResponse
