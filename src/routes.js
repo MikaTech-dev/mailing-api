@@ -4,4 +4,8 @@ const router = express.Router()
 
 
 // Is the server alive?
-export default router.get("/", isAlive)
+router.get("/", isAlive)
+
+// get  
+
+export default router

@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 
-function devEnv () {
+function appEnv () {
     if (process.env.ENV === "development") {
         return false
     }
@@ -15,7 +15,13 @@ const transporter = nodemailer.createTransport({
     },
     logger:true,
     pool: true, 
-    secure: devEnv
+    secure: appEnv
 });
+// try {
+//     await transporter.verify()
+//     console.log("Server ready to recieve messages!")
+// } catch (error){
+//     console.log("An error occurred: ", error);
+// }
 
 export default transporter
