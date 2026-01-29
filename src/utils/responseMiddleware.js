@@ -6,7 +6,7 @@ const sendResponse = (res, statusCode, success, message, data = null, errors = n
     };
 
     if (data) {
-        response.data
+        response.data = data
     }
 
     if (errors) {

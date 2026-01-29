@@ -1,5 +1,5 @@
 import express from "express"
-import isAlive from "./handlers/alive.handlers.js"
+import isAlive from "./services/alive.handlers.js"
 const router = express.Router()
 
 
