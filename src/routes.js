@@ -3,9 +3,9 @@ import isAlive from "./services/alive.handlers.js"
 const router = express.Router()
 
 
-// Is the server alive?
+// GET server status.
 router.get("/", isAlive)
 
-// get  
-
+// CREATE/SEND new email.
+// router.post("/")
 export default router

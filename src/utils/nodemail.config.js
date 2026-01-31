@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
         user: process.env.SENDER,
         pass: process.env.APP_PASS
     },
-    logger:true,
+    logger:true,    // Debugger enabled
     pool: true, 
     secure: appEnv
 });

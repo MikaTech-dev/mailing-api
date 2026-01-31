@@ -3,7 +3,7 @@ import "dotenv/config"
 import express from "express"
 import morgan from "morgan"
 import router from "./src/routes.js"
-import { verifyTransport } from "./src/services/nodemail.handler.js"
+import { verifyTransport } from "./src/services/email/nodemail.handler.js"
 // const cors = require ("cors")
 
 const app = express()
@@ -24,7 +24,7 @@ const PORT = process.env.NODE_PORT || 5000
 app.listen (PORT, ()=> {
     try {
         console.log (`☑️  Server started at http://localhost:${PORT}`)
-        verifyTransport()
+        verifyTransport() // Verify SMTP connection on startup.
     } catch (error) {
         console.log ("🚫  Error occurred while starting the server", error)
     }
