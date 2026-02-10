@@ -29,10 +29,10 @@ export const verifyHostname = async (req, res) => {
         const reqSource = req.hostname
         if (websiteArray.includes(reqSource)){
             console.log(`Requests from ${reqSource}`)
-            resolve("Valid hostname")   // True if req source is allowed
+            resolve("Origin Validated")   // True if req source is allowed
         }else {
             console.log (`Request from ${reqSource} couldnt be fulfilled`)
-            reject(new Error ("Host not allowed"))
+            reject(new Error ("Access denied: Host not allowed."))
         }
     })
 }
