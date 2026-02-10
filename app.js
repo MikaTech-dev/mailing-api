@@ -7,6 +7,8 @@ import { verifyGoogleTransport } from "./src/services/email/nodemail.handler.js"
 // const cors = require ("cors")
 
 const app = express()
+// Todo: config cors security policy
+
 
 // Cors
 
