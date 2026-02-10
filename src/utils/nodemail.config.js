@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer"
+import {MailtrapTransport} from "mailtrap"
 
 function appEnv () {
     if (process.env.ENV === "development") {
@@ -7,10 +8,10 @@ function appEnv () {
     return true
 }
 
-const transporter = nodemailer.createTransport({
+const gmailTransporter = nodemailer.createTransport({
     service:"gmail",
     auth: {
-        user: process.env.SENDER,
+        user: process.env.GMAIL_SENDER,
         pass: process.env.APP_PASS
     },
     logger:true,    // Debugger enabled
@@ -18,10 +19,10 @@ const transporter = nodemailer.createTransport({
     secure: appEnv
 });
 // try {
-//     await transporter.verify()
+//     await gmailtransporter.verify()
 //     console.log("Server ready to recieve messages!")
 // } catch (error){
 //     console.log("An error occurred: ", error);
 // }
 
-export default transporter
+export default gmailTransporter

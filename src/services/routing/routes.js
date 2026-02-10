@@ -1,5 +1,5 @@
 import express from "express"
-import isAlive from "./services/alive.handlers.js"
+import { isAlive } from "./route.logic.js"
 const router = express.Router()
 
 
