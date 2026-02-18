@@ -1,5 +1,5 @@
 import sendResponse from "../../utils/response.middleware.js"
-import {verifyHostname} from "../../utils/verify.origin.js";
+import {verifyOrigin} from "../../utils/verify.origin.js";
 import { sendEmail } from "../email/nodemail.handler.js";
 
 /* Is server alive? */
@@ -7,7 +7,7 @@ import { sendEmail } from "../email/nodemail.handler.js";
 const isAlive = async (req, res)=> {
     try {
         // await verifyGoogleTransport()
-        const msg = await verifyHostname(req, res)
+        const msg = await verifyOrigin(req, res)
         sendResponse(res, 200, true, msg )
         // if (req.hostname in websites.split(",")) console.log(true); else console.log(typeof req.hostname)
         // TODO: add match case using regex to check if the hostname is in the new websites array (might use string instead of array)
@@ -18,7 +18,7 @@ const isAlive = async (req, res)=> {
 }
 
 const emailRequest = async (req, res) => {
-    await verifyHostname(req, res).then(
+    await verifyOrigin(req, res).then(
         () => {
             // TODO: Add logic to parse req.body for email/origin details and then sendemail with the relevant details.
         }
