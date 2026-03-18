@@ -1,5 +1,5 @@
 import express from "express"
-import { isAlive } from "./route.logic.js"
+import { emailRequest, isAlive } from "./route.logic.js"
 const router = express.Router()
 
 
@@ -7,5 +7,5 @@ const router = express.Router()
 router.get("/", isAlive)
 
 // CREATE/SEND new email.
-// router.post("/")
+router.post("/mail", emailRequest)
 export default router

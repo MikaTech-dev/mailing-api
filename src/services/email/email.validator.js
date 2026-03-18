@@ -1,32 +1,44 @@
 import Joi from "joi";
 
+
+
 const schema = Joi.object({
     name: Joi.string()
-    .min(5)
+    .min(3)
     .max(60)
-    .required(),
+    .required()
+    .pattern(new RegExp(/[A-Z]/, "i")),
+    // Todo: add regex to only accept string
 
     email: Joi.string()
-    .email({ maxDomainSegments: 3, }),
+    .email({ maxDomainSegments: 3, })
+    .required(),
 
-    phone: Joi.number()
-    .integer()
-    .positive()
-    .min(10)  // Americas .incl
-    .max(15), // Germany .incl
+    phone: Joi.string()
+    .min(5)
+    .max(17),
 
     message: Joi.string()
-    .alphanum(),
+    .min(5)
+    .max(700)
+    .required(),
 
     website: Joi.string()
     .uri()
+    .required(),
+
+    recipient: Joi.string()
+    .email({maxDomainSegments: 3, })
+    .required(),
 })
 
-const validate = async () => {
-    try {
-        await schema.validateAsync()
-    }catch (error) {
-        console.log("An error occurred: ", error);
+const verifySchema = (data) => {
+    const {error, value} = schema.validate(data)
+    if (error) {
+        throw new Error(error);
     }
+    return value
 }
 
+
+export default verifySchema
