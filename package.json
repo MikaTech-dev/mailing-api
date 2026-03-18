@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "author": "K3n",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -27,11 +27,14 @@
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
     "joi": "^18.0.1",
+    "mailtrap": "^4.4.0",
     "morgan": "^1.10.1",
-    "nodemailer": "^7.0.9"
+    "nodemailer": "^7.0.9",
+    "winston": "^3.19.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
+    "@ngrok/ngrok": "^1.7.0",
     "eslint": "^9.38.0",
     "globals": "^16.4.0",
     "nodemon": "^3.1.10"
