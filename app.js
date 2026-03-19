@@ -9,8 +9,8 @@ import contentNegotiator from "./src/utils/content.negotiator.js"
 import cors from "cors"
 
 const app = express()
-// Todo: config cors security policy
-
+// Morgan config
+app.use(morgan("dev"))
 
 // Cors
 app.use(cors({methods: "GET, POST"}))
@@ -25,11 +25,6 @@ app.use( async (req, res, next)=> {
     next()
 })
 
-// Morgan config
-if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"))
-}
-
 app.use(express.json())
 
 
@@ -41,6 +36,7 @@ app.listen (PORT, HOSTNAME, ()=> {
     (async () => {
         try {
             await verifySMTP() // Verify SMTP connection on startup.
+            console.log("☑️  SMTP Verified");
             console.log (`☑️  Server started at http://${HOSTNAME}:${PORT}`)
             app.use("/api", router)
         } catch (error) {
