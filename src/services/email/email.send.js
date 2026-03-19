@@ -6,7 +6,7 @@ import { gmailTransporter, mailtrapTransporter } from "../../utils/nodemail.conf
 // Send email with mailtrap function
 const sendWithMailtrap = async (name, email, phone, message, website, recipient) => {
     try {
-        console.log(`📨 Sending mail via mailtrap from ${process.env.MAILTRAP_SENDER} to ${recipient}`)
+        console.log(`📨 Sending mail with mailtrap from ${process.env.MAILTRAP_SENDER} to ${recipient}`)
         const info = await mailtrapTransporter.sendMail({
             from: process.env.MAILTRAP_SENDER,
             to: recipient,
@@ -27,7 +27,7 @@ const sendWithMailtrap = async (name, email, phone, message, website, recipient)
 // Send email with google SMTP
 const sendWithGoogle = async (name, email, phone, message, website, recipient) => {
     try {
-        console.log(`📨 Sending mail via gmail from ${process.env.GMAIL_SENDER} to ${recipient}`)
+        console.log(`📨 Sending mail with gmail from ${process.env.GMAIL_SENDER} to ${recipient}`)
         const info = await gmailTransporter.sendMail ({
                 from: process.env.GMAIL_SENDER,
                 to: recipient,
