@@ -42,6 +42,9 @@ const emailRequest = async (req, res) => {
                     <td width="70%" class="data-row data-value" style="padding: 12px 0;"><a href="tel:${phone}" style="color: #7c3aed; text-decoration: none; font-weight: 600;">${phone}</a></td>
                 </tr>
             `
+            else {
+                return phone
+            }
         }
         const {msg, info} = await serviceSelector2(name, email, formatter(), message, website, recipient)
         sendResponse(res, 200, true, msg, info)

@@ -1,9 +1,6 @@
 import "dotenv/config"
-
-
 const websites = process.env.WEBSITES
 const allowedSites = websites.split(",")
-
 const websiteSet = new Set(allowedSites)    // transform list into a set for O(1) time complexity
 
 // Promise to verify request origin

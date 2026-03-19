@@ -20,12 +20,15 @@ const gmailTransporter = nodemailer.createTransport({
 
 // Check if sandbox is enabled
 const isSandbox = (tranportValue)=>{
-    if (process.env.MAILTRAP_USE_SANDBOX) {
+    if (process.env.MAILTRAP_USE_SANDBOX === "true") {
         console.log(`Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ✅`)
         return true
     }
-    console.log("⚠️ Careful, Mailtrap live in use ⚠️")
-    return false
+    else if (process.env.MAILTRAP_USE_SANDBOX === "false") {
+        console.log(`⚠️ Careful, Mailtrap live in use for property "${tranportValue} ⚠️`)
+        return false
+    }
+    else throw Error (`Unabled to determine environment/Invalid sandbox value "${process.env.MAILTRAP_USE_SANDBOX}", with char length: ${process.env.MAILTRAP_USE_SANDBOX.length}`)
 }
 
 const mailtrapHost = ()=> {
@@ -36,14 +39,14 @@ const mailtrapHost = ()=> {
 }
 
 const mailtrapUser = () => {
-    if (isSandbox("User")) {
+    if (isSandbox("user")) {
         return "1d0fdcd7fb935b"
     }
     return "api"
 }
 
 const mailtrapPass = () => {
-    if (isSandbox("Pass")) {
+    if (isSandbox("pass")) {
         return "ea042d73f32bd0"
     }
     return process.env.MAILTRAP_TOKEN
