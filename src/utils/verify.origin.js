@@ -14,9 +14,6 @@ export const verifyOrigin = (req, ) => {
         const reqMode = req.header("sec-fetch-mode") //Browser likely header, checks req mode is https 
         // Allow browser traffic
         console.log("Request mode:", reqMode);
-
-        
-        console.log(websiteSet);
         
         if (!reqOrigin) {
             console.log(`Access denied from origin ${reqOrigin}, bad origin`)

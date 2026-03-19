@@ -13,7 +13,7 @@ const app = express()
 
 
 // Cors
-app.use(cors({origin: "http://localhost:5173", methods: "GET, POST"}))
+app.use(cors({methods: "GET, POST"}))
 
 
 // Enforce json only content-type
@@ -35,12 +35,13 @@ app.use(express.json())
 
 // Server config and startup
 const PORT = process.env.NODE_PORT || 5000
+const HOSTNAME = "0.0.0.0"
 
-app.listen (PORT, ()=> {
+app.listen (PORT, HOSTNAME, ()=> {
     (async () => {
         try {
-            console.log (`☑️  Server started at http://localhost:${PORT}`)
             await verifySMTP() // Verify SMTP connection on startup.
+            console.log (`☑️  Server started at http://${HOSTNAME}:${PORT}`)
             app.use("/api", router)
         } catch (error) {
             console.log ("🚫  Error occurred while starting the server", error)
