@@ -34,23 +34,24 @@ const serviceSelector = async (name, phone, email, message, website, recipient)=
 
 const serviceSelector2 = async (name, email, phone, message, website, recipient) => {
     try {
-        await verifyMailtrap()
+        console.log ("Selector chose Mailtrap w/Selector 2")
         return {
-            msg: "Selector chose Mailtrap w/Selector 2",
+            msg: "Selector send email with Mailtrap successfully via/Selector 2",
             info: await sendWithMailtrap(name, email, phone, message, website, recipient)
         }
     } catch (err) {
-        console.log (`Selector encountered an error selectiong mailtrap ${err}\n Sending with googleSMTP instead...`)
+        console.log(`Selector encountered an error selectiong mailtrap ${err}\n Sending with googleSMTP instead...`)
         try {
-            await verifyGoogleSMTP().catch(error => {throw new Error (error)})
-            return {
-                msg: "Selector has chosen GoogleSMTP: Mailtrap is down.",
-                info: await sendWithGoogle(name, email, phone, message, website, recipient)
+            console.log ("Selector chose GoogleSMTP w/Selector 2, Mailtrap failed or is down")
+                return {
+                msg: "Selector has sent email with gmail successsfully via/Selector 2",
+                info: await sendWithGoogle (name, email, phone, message, website, recipient)
             }
         } catch (err) {
-            console.log ("Selector 2 likely failed to select service: \n", err)
-            throw new Error ("Selector 2 likely failed to select service \n", err)
+            console.log ("Selector failed to send email\n", err)
+            throw new Error ("Failed to send email, both email services likely down")
         }
+        
     }
 }
 

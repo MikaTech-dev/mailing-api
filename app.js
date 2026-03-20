@@ -7,11 +7,14 @@ import { verifySMTP } from "./src/utils/smtp.verify.js"
 import { verifyOrigin } from "./src/utils/verify.origin.js"
 import contentNegotiator from "./src/utils/content.negotiator.js"
 import cors from "cors"
+import limiter from "./src/utils/rate.limit.js"
 
 const app = express()
 // Morgan config
 app.use(morgan("dev"))
 
+
+app.use(limiter)
 // Cors
 app.use(cors({methods: "GET, POST"}))
 
