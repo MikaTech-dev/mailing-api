@@ -35,7 +35,7 @@ const verifySMTP = () => {
 }
 
 const verifyMailtrap = async () => {
-    mailtrapTransporter.verify().then(
+    return mailtrapTransporter.verify().then(
         (result) => {
             console.log("✅ Mailtrap (ONLY) SMTP connection successful: ", result)
         }
@@ -43,7 +43,7 @@ const verifyMailtrap = async () => {
 }
 
 const verifyGoogleSMTP = async () => {
-    gmailTransporter.verify().then(
+    return gmailTransporter.verify().then(
         (result) => {
             console.log("✅ Google (ONLY)SMTP connection successful", result)
         }

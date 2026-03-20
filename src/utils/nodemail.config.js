@@ -15,13 +15,13 @@ const gmailTransporter = nodemailer.createTransport({
     },
     logger:false,    // Debugger enabled
     pool: true, 
-    secure: appEnv
+    secure: appEnv()
 });
 
 // Check if sandbox is enabled
 const isSandbox = (tranportValue)=>{
     if (process.env.MAILTRAP_USE_SANDBOX === "true") {
-        console.log(`Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ✅`)
+        console.log(`❄️  Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ❄️`)
         return true
     }
     else if (process.env.MAILTRAP_USE_SANDBOX === "false") {
@@ -61,7 +61,8 @@ const mailtrapTransporter = nodemailer.createTransport({
         user: mailtrapUser(),
         pass: mailtrapPass(),
     },
-    logger:true
+    logger:true,
+    pool: true
 });
 
 
