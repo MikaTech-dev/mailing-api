@@ -8,6 +8,7 @@ jobs:
     web-deploy:
         name: Deploy Node JS
         runs-on: ubuntu-latest
+        environment: production
         steps:
             # Get latest code
             - name: Get latest code
