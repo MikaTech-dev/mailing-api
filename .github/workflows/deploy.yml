@@ -21,3 +21,4 @@ jobs:
                 username: ${{ secrets.FTP_USER }}
                 password: ${{ secrets.FTP_PASS }}
                 log-level: verbose
+                protocol: ftp
