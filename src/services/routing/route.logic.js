@@ -9,7 +9,7 @@ const isAlive = async (req, res)=> {
     try {
         // await verifySMTP()
         // const msg = await verifyOrigin(req, res)
-        const msg = ("Server is alive")
+        const msg = ("Server is alive!!!")
         sendResponse(res, 200, true, msg )
         // if (req.hostname in websites.split(",")) console.log(true); else console.log(typeof req.hostname)
         // TODO: add match case using regex to check if the hostname is in the new websites array (might use string instead of array)
