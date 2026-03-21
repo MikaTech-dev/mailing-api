@@ -8,6 +8,7 @@ jobs:
     web-deploy:
         name: Deploy Node JS
         runs-on: ubuntu-latest
+        environment: production
         steps:
             # Get latest code
             - name: Get latest code
@@ -19,3 +20,4 @@ jobs:
                 server: ${{ secrets.FTP_SERVER }}
                 username: ${{ secrets.FTP_USER }}
                 password: ${{ secrets.FTP_PASS }}
+                log-level: verbose
