@@ -1,3 +1,4 @@
+import { logger } from "./logger.config.js";
 import { gmailTransporter } from "./nodemail.config.js";
 // import sendResponse from "../../utils/response.middleware.js";
 import { mailtrapTransporter } from "./nodemail.config.js";
@@ -10,14 +11,14 @@ const verifySMTP = () => {
             gmailTransporter.verify()
             .then(result =>{
                 const googleTransportResult = result
-                console.log("✅ Google SMTP connection successful: ", result);
+                logger.info("✅ Google SMTP connection successful: ", result);
                 
                 /* Mailtrap Transport */
                 (()=>{
                     mailtrapTransporter.verify()
                     .then(result => {
                         const mailtrapTransportResult = result
-                        console.log("✅ Mailtrap SMTP connection successful: ", mailtrapTransportResult )
+                        logger.info("✅ Mailtrap SMTP connection successful: ", mailtrapTransportResult )
                         resolve({ 
                             "Mailtrap": result,
                             "GoogleSMTP": googleTransportResult
@@ -29,7 +30,7 @@ const verifySMTP = () => {
 
         
     } catch (err) {
-        console.error("Failed to verify Either SMTP", err)
+        logger.error("Failed to verify Either SMTP", err)
         throw new Error("Failed to verify SMTP connection: ", err);
     }
 }
@@ -37,7 +38,7 @@ const verifySMTP = () => {
 const verifyMailtrap = async () => {
     return mailtrapTransporter.verify().then(
         (result) => {
-            console.log("✅ Mailtrap (ONLY) SMTP connection successful: ", result)
+            logger.info("✅ Mailtrap (ONLY) SMTP connection successful: ", result)
         }
     )
 }
@@ -45,7 +46,7 @@ const verifyMailtrap = async () => {
 const verifyGoogleSMTP = async () => {
     return gmailTransporter.verify().then(
         (result) => {
-            console.log("✅ Google (ONLY)SMTP connection successful", result)
+            logger.info ("✅ Google (ONLY)SMTP connection successful", result)
         }
     )
 }

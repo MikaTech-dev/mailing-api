@@ -4,14 +4,17 @@ import express from "express"
 import morgan from "morgan"
 import router from "./src/services/routing/routes.js"
 import { verifySMTP } from "./src/utils/smtp.verify.js"
-import { verifyOrigin } from "./src/utils/verify.origin.js"
+import { verifyOrigin,verifyAuth } from "./src/utils/verify.origin.js"
 import contentNegotiator from "./src/utils/content.negotiator.js"
 import cors from "cors"
 import limiter from "./src/utils/rate.limit.js"
+import { logger } from "./src/utils/logger.config.js"
 
 const app = express()
 // Morgan config
-app.use(morgan("dev"))
+app.use(morgan("dev", {
+    stream: { write: (message) => logger.info(message.trim()) }
+}))
 
 
 app.use(limiter)
@@ -24,8 +27,10 @@ app.use(contentNegotiator)
 
 // Verify origin on every request
 app.use( async (req, res, next)=> {
-    await verifyOrigin(req, res)
-    next()
+    const isValid = await verifyAuth(req, res)
+    if (isValid) {
+        next()
+    }
 })
 
 app.use(express.json())
@@ -39,11 +44,11 @@ app.listen (PORT, HOSTNAME, ()=> {
     (async () => {
         try {
             await verifySMTP() // Verify SMTP connection on startup.
-            console.log("☑️  SMTP Verified");
-            console.log (`☑️  Server started at http://${HOSTNAME}:${PORT}`)
+            logger.info("☑️  SMTP Verified");
+            logger.info(`☑️  Server started at http://${HOSTNAME}:${PORT}`)
             app.use("/api", router)
         } catch (error) {
-            console.log ("🚫  Error occurred while starting the server", error)
+            logger.error("🚫  Error occurred while starting the server", error)
         }
     })()
 })

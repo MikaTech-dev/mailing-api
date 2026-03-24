@@ -1,3 +1,4 @@
+import { logger } from "../../utils/logger.config.js";
 import { mailTemplate } from "./email.template.js";
 import { gmailTransporter, mailtrapTransporter } from "../../utils/nodemail.config.js";
 
@@ -6,14 +7,14 @@ import { gmailTransporter, mailtrapTransporter } from "../../utils/nodemail.conf
 // Send email with mailtrap function
 const sendWithMailtrap = async (name, email, phone, message, website, recipient) => {
     try {
-        console.log(`📨 Sending mail with mailtrap from ${process.env.MAILTRAP_SENDER} to ${recipient}`)
+        logger.info (`📨 Sending mail with mailtrap from ${process.env.MAILTRAP_SENDER} to ${recipient}`)
         const info = await mailtrapTransporter.sendMail({
             from: process.env.MAILTRAP_SENDER,
             to: recipient,
             subject: "Someone is trying to reach you!!",
             html: mailTemplate(name, email, phone, message, website, recipient)
         })
-        console.log("Sent email with mailtrap, info: ", info,)
+        logger.info ("Sent email with mailtrap, \ninfo: ", info)
         return info
 
     } catch (error) {
@@ -27,14 +28,14 @@ const sendWithMailtrap = async (name, email, phone, message, website, recipient)
 // Send email with google SMTP
 const sendWithGoogle = async (name, email, phone, message, website, recipient) => {
     try {
-        console.log(`📨 Sending mail with gmail from ${process.env.GMAIL_SENDER} to ${recipient}`)
+        logger.info (`📨 Sending mail with gmail from ${process.env.GMAIL_SENDER} to ${recipient}`)
         const info = await gmailTransporter.sendMail ({
                 from: process.env.GMAIL_SENDER,
                 to: recipient,
                 subject: "Someone is trying to reach you!!",
                 html: mailTemplate(name, email, phone, message, website, recipient)
             })
-        console.log("Sent email with google SMTP, " + info)
+        logger.info ("Sent email with google SMTP, \ninfo " + info)
         return info
 
     } catch (error) {
