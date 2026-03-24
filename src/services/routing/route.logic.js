@@ -11,7 +11,7 @@ const isAlive = async (req, res)=> {
         // const msg = await verifyOrigin(req, res)
         const msg = ("Server is alive!!!")
         sendResponse(res, 200, true, msg )
-        // if (req.hostname in websites.split(",")) console.log(true); else console.log(typeof req.hostname)
+        // if (req.hostname in websites.split(",")) logger.info (true); else logger.info (typeof req.hostname)
         // TODO: add match case using regex to check if the hostname is in the new websites array (might use string instead of array)
     }catch(error) {
         sendResponse(res, 500, false, "An internal server error occurred, view logs for more details", null, error.message)
@@ -22,10 +22,10 @@ const isAlive = async (req, res)=> {
 const emailRequest = async (req, res) => {
     try {
         // await verifyOrigin(req, res)
-        // await verifySMTP().then((result)=> {console.log(result)}) 
+        // await verifySMTP().then((result)=> {logger.info (result)}) 
         const validationResult = verifySchema(req.body)
         let {name, phone, email, message, website, recipient} = validationResult
-        // console.log(`User's name is ${name}, with email: ${email}, and message: ${message} to recipient: ${recipient}`);
+        // logger.info (`User's name is ${name}, with email: ${email}, and message: ${message} to recipient: ${recipient}`);
         // sendResponse(res, 200, true, validationResult)
         const formatter = () => {
             if (phone === undefined) {

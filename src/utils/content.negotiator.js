@@ -1,3 +1,4 @@
+import { logger } from "./logger.config.js";
 import sendResponse from "./response.middleware.js"
 
 
@@ -5,14 +6,15 @@ import sendResponse from "./response.middleware.js"
 export default async (req, res, next)=> {
     try {
         if (req.method != "GET" && !(req.is("application/json")) ) {
+            logger.error ("Unsupported content-type")
             throw new Error("Unsupported Media Type")
         }
         else if (req.method === "GET" && !(req.is("application/json"))) {
-            console.log(`${req.ip} - Recieved supported content type ${req.get("content-type")}`);
+            logger.info (`Recieved request with excuse: ${req.method}`);
         }
     } catch (error) {
-        sendResponse(res, 415, false, error.message, "Ensure your headers are set to application/JSON and try again")
-        console.log(`${req.ip} - Recieved bad content type ${req.get("content-type")}. Error:\n ${error}`);
+        sendResponse(res, 415, false, error.message, "Ensure headers are set to application/JSON and try again")
+        logger.error (`Recieved bad content type ${req.get("content-type")}. Error:\n ${error}`);
         return
     }
     next()

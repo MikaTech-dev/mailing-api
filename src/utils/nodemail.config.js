@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer"
+import { logger } from "./logger.config.js";
 
 function appEnv () {
     if (process.env.ENV === "development") {
@@ -21,11 +22,11 @@ const gmailTransporter = nodemailer.createTransport({
 // Check if sandbox is enabled
 const isSandbox = (tranportValue)=>{
     if (process.env.MAILTRAP_USE_SANDBOX === "true") {
-        console.log(`❄️  Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ❄️`)
+        logger.info(`❄️  Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ❄️`)
         return true
     }
     else if (process.env.MAILTRAP_USE_SANDBOX === "false") {
-        console.log(`⚠️ Careful, Mailtrap live in use for property "${tranportValue} ⚠️`)
+        logger.info (`⚠️ Careful, Mailtrap live in use for property "${tranportValue} ⚠️`)
         return false
     }
     else throw Error (`Unabled to determine environment/Invalid sandbox value "${process.env.MAILTRAP_USE_SANDBOX}", with char length: ${process.env.MAILTRAP_USE_SANDBOX.length}`)
@@ -56,7 +57,7 @@ const mailtrapPass = () => {
 // Mailtrap SMPT Transporter Config
 const mailtrapTransporter = nodemailer.createTransport({
     host: mailtrapHost(),
-    port: 2525,
+    port: 587,
     auth: {
         user: mailtrapUser(),
         pass: mailtrapPass(),
