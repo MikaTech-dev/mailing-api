@@ -20,7 +20,16 @@ app.set("trust proxy", 1)
 
 app.use(limiter)
 // Cors
-app.use(cors({ methods: "GET, POST", origin: "*" }))
+const websites = process.env.WEBSITES || ""
+const sitesArray = websites.split(",").map(site => site.trim())
+
+app.use(cors(
+    {
+        methods: "GET, POST",
+        origin: sitesArray,
+        allowedHeaders: ["Content-Type", "Authorization", "authv1"]
+    }
+))
 
 
 // Enforce json only content-type
