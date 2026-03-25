@@ -1,9 +1,14 @@
 import "dotenv/config"
 import { logger } from "./logger.config.js"
 import sendResponse from "./response.middleware.js"
-const websites = process.env.WEBSITES
+const websites = process.env.WEBSITES || ""
 const allowedSites = websites.split(",")
 const websiteSet = new Set(allowedSites)    // transform list into a set for O(1) time complexity
+
+const validKeys = process.env.VALID_KEYS || ""
+const authKeysArray = validKeys.split(",")
+const authKeySet = new Set(authKeysArray)
+
 
 // Promise to verify request origin
 // something of our own inhouse CORS policy
@@ -35,9 +40,6 @@ const verifyOrigin = (req, ) => {
 // You could relinquish the need for a promise by just making the above an async function
 
 const verifyAuth = async(req, res) => {
-    const validKeys = process.env.VALID_KEYS
-    const authKeysArray = validKeys.split(",")
-    const authKeySet = new Set(authKeysArray)
     const authKey = await req.get("authv1")
 
     if (authKeySet.has(authKey)) {

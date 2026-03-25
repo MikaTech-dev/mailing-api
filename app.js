@@ -16,17 +16,18 @@ app.use(morgan("dev", {
     stream: { write: (message) => logger.info(message.trim()) }
 }))
 
+app.set("trust proxy", 1)
 
 app.use(limiter)
 // Cors
-app.use(cors({methods: "GET, POST"}))
+app.use(cors({ methods: "GET, POST", origin: "*" }))
 
 
 // Enforce json only content-type
 app.use(contentNegotiator)
 
 // Verify origin on every request
-app.use( async (req, res, next)=> {
+app.use(async (req, res, next) => {
     const isValid = await verifyAuth(req, res)
     if (isValid) {
         next()
@@ -40,7 +41,7 @@ app.use(express.json())
 const PORT = process.env.NODE_PORT || 5000
 const HOSTNAME = "0.0.0.0"
 
-app.listen (PORT, HOSTNAME, ()=> {
+app.listen(PORT, HOSTNAME, () => {
     (async () => {
         try {
             await verifySMTP() // Verify SMTP connection on startup.
