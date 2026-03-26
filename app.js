@@ -18,18 +18,20 @@ app.use(morgan("dev", {
 
 app.set("trust proxy", 1)
 
-app.use(limiter)
 // Cors
 const websites = process.env.WEBSITES || ""
 const sitesArray = websites.split(",").map(site => site.trim())
 
 app.use(cors(
     {
-        methods: "GET, POST",
+        methods: ["GET", "POST", "OPTIONS"],
         origin: sitesArray,
-        allowedHeaders: ["Content-Type", "Authorization", "authv1"]
+        allowedHeaders: ["Content-Type", "Authorization", "authv1"],
+        credentials: true
     }
 ))
+
+app.use(limiter)
 
 
 // Enforce json only content-type
