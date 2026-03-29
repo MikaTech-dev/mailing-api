@@ -1,14 +1,14 @@
 {
-  "name": "nodemail-server",
+  "name": "mailing-api",
   "version": "1.0.0",
   "description": "nodemail server for portfolio",
-  "homepage": "https://github.com/MikaTech-dev/nodemail-server#readme",
+  "homepage": "https://github.com/MikaTech-dev/mailing-api#readme",
   "bugs": {
-    "url": "https://github.com/MikaTech-dev/nodemail-server/issues"
+    "url": "https://github.com/MikaTech-dev/mailing-api/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MikaTech-dev/nodemail-server.git"
+    "url": "git+https://github.com/MikaTech-dev/mailing-api.git"
   },
   "license": "MIT",
   "author": "K3n",
