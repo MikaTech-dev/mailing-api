@@ -1,8 +1,5 @@
-# nodemail-api
-nodemail server for email notifications/delivery (might be used for porfolio)
-
-## Overview
-A Node.js email server for email notifications/message delivery.
+# mailing-api
+Mailing platform agnostic mailing api for email template application and delivery
 
 ## Getting Started
 ### Installation
