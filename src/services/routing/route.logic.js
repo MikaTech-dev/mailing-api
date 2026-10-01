@@ -5,7 +5,7 @@ import verifySchema from "../email/email.validator.js";
 
 /* Is server alive? */
 
-const isAlive = async (req, res)=> {
+const healthCheck = async (req, res)=> {
     try {
         // await verifySMTP()
         // const msg = await verifyOrigin(req, res)
@@ -57,4 +57,4 @@ const emailRequest = async (req, res) => {
     }
 }
 
-export { isAlive, emailRequest }
+export { healthCheck, emailRequest }

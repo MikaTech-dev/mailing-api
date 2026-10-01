@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer"
 import { logger } from "./logger.config.js";
 
+const useMailtrapSandbox = process.env.MAILTRAP_USE_SANDBOX
+
 function appEnv () {
     if (process.env.ENV === "development") {
         return false
@@ -19,17 +21,17 @@ const gmailTransporter = nodemailer.createTransport({
     secure: appEnv()
 });
 
-// Check if sandbox is enabled
+// Check if sandbox mode is enabled
 const isSandbox = (tranportValue)=>{
-    if (process.env.MAILTRAP_USE_SANDBOX === "true") {
+    if (useMailtrapSandbox === "true") {
         logger.info(`❄️  Mailtrap Sandbox in use for property: "${tranportValue}" in transport config ❄️`)
         return true
     }
-    else if (process.env.MAILTRAP_USE_SANDBOX === "false") {
+    else if (useMailtrapSandbox === "false") {
         logger.info (`⚠️ Careful, Mailtrap live in use for property "${tranportValue} ⚠️`)
         return false
     }
-    else throw Error (`Unabled to determine environment/Invalid sandbox value "${process.env.MAILTRAP_USE_SANDBOX}", with char length: ${process.env.MAILTRAP_USE_SANDBOX.length}`)
+    else throw Error (`Unable to determine environment/Invalid sandbox value "${useMailtrapSandbox}", with char length: ${toString(useMailtrapSandbox) }`)
 }
 
 const mailtrapHost = ()=> {
