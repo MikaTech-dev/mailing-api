@@ -31,8 +31,6 @@ app.use(cors(
     }
 ))
 
-app.use(limiter)
-
 
 // Enforce json only content-type
 app.use(contentNegotiator)

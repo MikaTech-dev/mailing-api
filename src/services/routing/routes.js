@@ -1,5 +1,6 @@
 import express from "express"
 import { emailRequest, healthCheck } from "./route.logic.js"
+import limiter from "../../utils/rate.limit.js"
 const router = express.Router()
 
 
@@ -7,5 +8,5 @@ const router = express.Router()
 router.get("/", healthCheck)
 
 // CREATE/SEND new email.
-router.post("/mail", emailRequest)
+router.post("/mail", limiter, emailRequest)
 export default router
