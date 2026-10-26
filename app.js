@@ -7,7 +7,6 @@ import { verifySMTP } from "./src/utils/smtp.verify.js"
 import { verifyAuth } from "./src/utils/verify.origin.js"
 import contentNegotiator from "./src/utils/content.negotiator.js"
 import cors from "cors"
-import limiter from "./src/utils/rate.limit.js"
 import { logger } from "./src/utils/logger.config.js"
 
 const app = express()
@@ -44,6 +43,19 @@ app.use(async (req, res, next) => {
 })
 
 app.use(express.json())
+
+// Error logging middleware
+app.use((err, req, res, next) => {
+    logger.error("Unhandled request error:", err)
+    if (res.headersSent) {
+        return next(err)
+    }
+    res.status(err.status || 500).json({
+        success: false,
+        statusCode: err.status || 500,
+        message: err.message || "An unexpected error occurred"
+    })
+})
 
 
 // Server config and startup

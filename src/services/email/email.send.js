@@ -18,7 +18,7 @@ const sendWithMailtrap = async (name, email, phone, message, website, recipient)
         return info
 
     } catch (error) {
-        console.error("Failed to send email: \n", error)
+        logger.error("Failed to send email with mailtrap:", error)
         throw new Error (error)
     }
 }
@@ -39,7 +39,7 @@ const sendWithGoogle = async (name, email, phone, message, website, recipient) =
         return info
 
     } catch (error) {
-        console.error("Failed to send email: ", error)
+        logger.error("Failed to send email with google SMTP:", error)
         throw new Error (`Failed to send email: \n${error}`)
     }
 }

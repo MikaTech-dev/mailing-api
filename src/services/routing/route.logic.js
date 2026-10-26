@@ -1,6 +1,7 @@
 import sendResponse from "../../utils/response.middleware.js"
 import { serviceSelector2 } from "../../utils/smtp.selector.js";
 import verifySchema from "../email/email.validator.js";
+import { logger } from "../../utils/logger.config.js";
 
 const validRecipients = process.env.RECIPIENT.split(",")
 
@@ -16,7 +17,7 @@ const healthCheck = async (req, res) => {
         // TODO: add match case using regex to check if the hostname is in the new websites array (might use string instead of array)
     } catch (error) {
         sendResponse(res, 500, false, "An internal server error occurred, view logs for more details", null, error.message)
-        console.error("An error occured checking the server: ", error);
+        logger.error("An error occurred checking the server:", error);
     }
 }
 
@@ -56,7 +57,7 @@ const emailRequest = async (req, res) => {
 
 
     } catch (error) {
-        console.error("An error processing a mailing request\n", error)
+        logger.error("An error processing a mailing request:", error)
         sendResponse(res, 500, false, "An internal server error occurred, view logs for more details", null, error.message)
     }
 }
